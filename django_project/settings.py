@@ -113,6 +113,13 @@ TEMPLATE_DIRS = (
     location('templates'),
 )
 
+AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = 'delcarpio'
+
+S3_URL = config.S3_URL
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 try:
     from .local import *
 except ImportError:
