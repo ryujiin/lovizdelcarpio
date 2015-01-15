@@ -15,6 +15,11 @@ Loviz.Views.Pagina = Backbone.View.extend({
 	    if (this.model.toJSON().css) {
 	    	this.$el.addClass(this.model.toJSON().css)
 	    };
+	    if (modelo.slug!=='home') {
+	    	var titulo = this.model.toJSON().titulo+' || LovizDelCarpio.com lo mejor en calzado para dama, caballeros y niños';
+	    	window.views.head.modificar_titulo(titulo)	
+	    };
+	    
 	},
 	rellenar_pag:function () {
 		this.llenar_bloques();
