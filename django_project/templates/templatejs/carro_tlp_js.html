@@ -1,0 +1,85 @@
+{% verbatim %}
+	     <script id="mini_carro_template" type="text/template">
+        <a class="link" href="/carro/">
+          <span class="glyphicon glyphicon-shopping-cart"></span>Carrito <span class="badge number">{{lineas}}</span>
+        </a>
+      </script>
+
+      <script id="carro_template" type="text/template">
+        <div class="contenedor container-fluid">
+          <h1 class="titulo">Su carrito de compras</h1>
+         <div id="carro_cuerpo">
+            <h3 class="subtitulo"></h3>
+            {%if lineas != 0 %}
+              <div class="lineas_productos">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ref. de producto</th>
+                            <th class="text-center">talla</th>
+                            <th class="text-center">Precio</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="lineas_carro">
+                    </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div id="formu_envio" class="col-md-6 well"></div>
+                <div id="tabla_carro" class="col-md-6"></div>
+              </div>
+            {%endif%}
+         </div>
+         <div id="bloques_extras"></div>
+        </div>
+      </script>
+
+      <script id="num_lineas_carro_template" type="text/template">
+        Usted tiene <span>{{lineas}}</span> producto(s) en tu carrito de compras
+
+        {%if lineas!=0 %}
+          <button type="button" class="btn btn-default pull-right contraste1 procesar">Procesar mi compra</button>
+        {%endif%}
+      </script>
+
+      <script id="carro_tabla_total_template" type="text/template">
+            <table class="table">
+                <tr>
+                    <td><label for="">Subtotal</label></td>
+                    <td>S/. {{subtotal}}</td>
+                </tr>
+                <tr>
+                    <td><label for="">Envio estimado</label></td>
+                    <td>S/. {{envio}}</td>
+                </tr>
+                <tr>
+                    <td><label for="">Total</label></td>
+                    <td>S/. {{total}}</td>
+                </tr>
+            </table>
+            {%if pagar != true %}
+              <button type="button" class="btn btn-default pull-right procesar contraste1">Procesar mi compra</button>
+            {%endif%}
+      </script>
+
+       <script id="carro_linea_template" type="text/template">
+        <td class="img"><img src="{{thum}}" alt=""></td>
+        <td class="name">
+          <div>{{full_name}}</div>
+        </td>
+        <td class="tall text-center">{{talla}}</td>
+        <td class="precio text-center">S/. {{precio}}</td>
+        <td class="cantidad text-center">
+          <span class="down boton-cantidad icon-arrow-down"></span>          
+          <span class="numero">{{cantidad}}</span>
+          <span class="up boton-cantidad icon-arrow-up"></span>
+          <input type="hidden" class="cantidad_num" value="{{cantidad}}">
+        </td>
+        <td class="total text-center">S/. {{subtotal}}</td>
+        <td class="accion text-center"><span class="icon-trashcan"></span></td>
+      </script>
+{% endverbatim %}

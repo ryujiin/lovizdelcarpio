@@ -1,0 +1,40 @@
+{% verbatim %}
+	   <script id="menu_template" type="text/template">
+        <h2 class="titulo">
+          {{titulo}}
+        </h2>
+        <ul class="menu links">
+          {%for link in links%}
+            <li>
+              <a class="{{link.css}}" href="{{link.enlace}}">
+                {%if link.icono%}
+                  <span class="{{link.icono}}"></span>
+                {%endif%}
+                {{link.titulo}}
+              </a>
+            </li>
+          {%endfor%}
+        </ul>
+      </script>
+
+      <script id="bloque_template" type="text/template">
+        <h2 class="titulo">{{titulo}}</h2>
+        <div class="cuerpo_bloque">{{cuerpo}}</div>
+      </script>
+
+      <script id="newsletter_template" type="text/template">
+        <div class="newsletter">
+         <div class="text-center">Se el Primero en saber de ofertas y novedades</div>
+         <div class="envoltura">
+           <input type="text" class="input_newsletter{% if error %} error_sombra{% endif%}">
+           <span class="glyphicon glyphicon-envelope"></span>  
+         </div>
+         {%if email %}
+            <p class="text-center gracias text-capitalize">Enhorabuena, {{email}} se inscribio con exito!!!</p> 
+         {%endif%}
+         {%if error %}
+            <p class="text-center gracias text-capitalize">Porfavor ingrese un correo electronico valido!!!</p> 
+         {%endif%}
+        </div>         
+      </script>
+{%endverbatim%}

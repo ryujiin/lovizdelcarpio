@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{%block layout%}
+	<header>
+    <section class="header_banner">
+      <div id="baner_top"></div>
+    </section>
+    <section class="header_utilis container-fluid">
+      <div class="row">
+        <div id="menu_top_ayuda" class="enlinea"></div>
+        <div id="menu_top_usuario" class="pull-right"></div>
+        <div id="menu_top_buscar" class="pull-right">
+          {% if user.is_staff %}
+          <a href="/desboard/"><span class="glyphicon glyphicon-cog"></span>Desboard</a>
+          {% endif %}
+          <span class="glyphicon glyphicon-search"></span>
+        </div>
+      </div>
+    </section>
+    <section class="header_principal container-fluid">
+      <div class="contenedor row">
+        <div class="col-md-3" id="logo"><h1><a class="link" href="/">LovizDelCarpio</a></h1></div>
+        <div class="col-md-7" id="navegacion"></div>
+        <div class="pull-right" id="mini_carro"></div>
+      </div>
+    </section>
+    <div id="linea_addcart"></div>
+    <section class="header_banner">
+      <div id="banner_header"></div>
+    </section>
+   </header>
+   <section id="contenido">
+   </section>
+   <section id="newsletter">
+   </section>
+   <footer>
+      <div class="container">
+        <div id="footer" class="row">
+          
+        </div>
+      </div>
+      <div id="bootom_footer"></div>
+   </footer>
+{%endblock%}
+
+{% block templatesjs %}
+  {% include 'templatejs/tienda_tlp_js.html' %}
+  {% include 'templatejs/catalogo_tlp_js.html' %}
+  {% include 'templatejs/producto_sigle_tlp_js.html' %}
+  {% include 'templatejs/carro_tlp_js.html' %}
+  {% include 'templatejs/pagina_tlp_js.html' %}
+  {% include 'templatejs/usuario_tlp_js.html' %}
+{%endblock%}

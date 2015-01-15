@@ -1,0 +1,73 @@
+{% verbatim %}	
+	<script id="pagina_template" type="text/template">
+      <div class="container-fluid">
+        <div class="contenedor row">
+          <div id="pagina_top"></div>
+          <div id="pagina_centro">
+            <h1 class="titulo">{{titulo}}</h1>
+            <div class="cuerpo">{{cuerpo}}</div>
+          </div>
+          <div id="pagina_botton"></div>
+        </div>
+      </div>
+    </script>
+	
+	  <script id="bloque_limpio" type="text/template">
+        {{cuerpo}}
+    </script>
+
+    <script id="bloque_imagen_template" type="text/template">
+      <figure>
+        <a href="{{link}}">
+          <img src="{{foto}}" alt="{{titulo}}">
+        </a>
+        
+      </figure>
+    </script>
+
+  <script id="pagina_404_template" type="text/template">
+    <div class="contenedor">
+      <h1>
+        404
+      </h1>
+    </div>
+  </script>
+
+  <script id="carrusel_cuerpo_left_template" type="text/template">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-3">
+                  <h2>{{titulo}}</h2>
+                  <div class="cuerpo">
+                     <p>{{cuerpo}}</p>
+                  </div>
+               </div>
+               <div class="col-md-9">
+                  <div class="lista"></div>
+               </div>
+            </div>
+         </div>
+      </script>
+
+      <script id="carrusel_cuerpo_derecha_template" type="text/template">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-9">                  
+                  <div class="lista"></div>
+               </div>
+               <div class="col-md-3">
+                  <h2>{{titulo}}</h2>
+                  <div class="cuerpo">
+                     <p>{{cuerpo}}</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </script>
+
+      <script id="carrusel_centro_template" type="text/template">
+        <h3>{{titulo}}</h3>
+        <div class="lista">
+        </div>
+      </script>
+{% endverbatim %}
