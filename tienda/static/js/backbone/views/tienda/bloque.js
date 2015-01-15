@@ -13,7 +13,6 @@ Loviz.Views.Bloque = Backbone.View.extend({
 	    if (this.css!=='') {
 	    	this.$el.addClass(this.css);
 	    };
-	    debugger;
 	    $(this.contenedor).append(this.$el)
 	},
 	sacar_datos:function () {

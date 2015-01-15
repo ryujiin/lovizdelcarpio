@@ -15,7 +15,8 @@ class ImagensCarruselSerializers(serializers.ModelSerializer):
 class CarruselSerializer(serializers.ModelSerializer):
 	seccion = serializers.CharField(read_only=True)
 	imagenes_carrusel = ImagensCarruselSerializers (many=True)
-
+	template = serializers.CharField(read_only=True)
+	
 	class Meta:
 		model = Carrusel
 		fields = ('id','titulo','nombre_interno','cuerpo','seccion','css','template','modelo','filtro','items_mostrar','tipo','imagenes_carrusel')

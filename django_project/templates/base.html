@@ -17,7 +17,6 @@
 	    <link rel="stylesheet" href="{% static "css/normalize.css/" %}" />
 	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="{% static "css/carrusel/owl.carousel.css/" %}" />	    
-	    <link rel="stylesheet" href="{% static "css/jquery-ui.min.css/" %}" />	    
 	    <link rel="stylesheet" href="{% static "css/iconos.css/" %}" />
 	    <link rel="stylesheet" href="{% static "css/estilos.css/" %}" />
     {% endblock%}
@@ -36,18 +35,16 @@
 	{% endblock%}
 
 	{%block scripts%}
-    <!--
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="//underscorejs.org/underscore-min.js"></script>
-<script src="{% static "js/vendor/backbone-min.js/" %}"></script>
-    "></script>
-
-    -->
-    <script src="{% static "js/vendor/jquery.js/" %}"></script>
+    
+    <script src="{% static "js/vendor/jquery.js/" %}"></script>    
     <script src="{% static "js/vendor/underscore.js/" %}"></script>
     <script src="{% static "js/vendor/backbone-min.js/" %}"></script>
-    
-	<!--<script src="//backbonejs.org/backbone.js"></script>        -->
+    <!--
+
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//underscorejs.org/underscore-min.js"></script>
+	<script src="//backbonejs.org/backbone.js"></script>
+    -->
 
 	<script src="{% static "js/vendor/swig.js/" %}"></script>
 	
@@ -108,6 +105,7 @@
 		<script src="{% static "js/backbone/views/tienda/lista_comentario.js/" %}"></script>
 		<script src="{% static "js/backbone/views/tienda/comentarios.js/" %}"></script>
 		<script src="{% static "js/backbone/views/tienda/carrusel.js/" %}"></script>
+		<script src="{% static "js/backbone/views/tienda/imagen_carrusel.js/" %}"></script>
 		<script src="{% static "js/backbone/views/tienda/header.js/" %}"></script>
 	<script src="{% static "js/backbone/views/catalogo/catalogo.js/" %}"></script>	
 		<script src="{% static "js/backbone/views/catalogo/producto.js/" %}"></script>	

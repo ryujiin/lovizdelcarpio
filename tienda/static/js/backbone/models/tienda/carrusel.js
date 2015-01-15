@@ -1,3 +1,3 @@
 Loviz.Models.Carrusel = Backbone.Model.extend({
-	urlRoot : '/api/tienda/carrusel/'
+	urlRoot : '/api/tienda/carruseles/'
 });

@@ -21,15 +21,25 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 		this.render();
 	},
 	llenar_carrusel:function () {
-
-
-
-
-
-
-
-
-		/*
+		if (this.model.toJSON().modelo==='') {
+			this.llenar_imagenes();
+		}else{
+			this.llenar_productos();
+		}		
+	},
+	llenar_imagenes:function () {
+		var self = this;
+		imagenes = this.model.toJSON().imagenes_carrusel;
+		imagenes.forEach(this.addimagen,this);
+		this.poner_carrusel();
+	},
+	addimagen:function (img) {
+		var view_imagen=new Loviz.Views.Imagen_Carrusel({
+			model:img
+		});
+		this.$('.lista').append(view_imagen.$el);
+	},
+	llenar_productos:function () {
 		this.num_carrusel = 0;
 		var self = this;
 		var coleccion;
@@ -51,8 +61,6 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 				self.poner_carrusel();
 			});
 		}
-		*/
-		
 	},
 	addproducto:function (produ) {
 		if (this.num_carrusel<6) {
@@ -67,6 +75,7 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 		this.$('.lista').owlCarousel({
 			items:num_items,
 		});
+		debugger;
 	},
 	addComentario:function (coment) {
 		if (this.num_carrusel<4) {

@@ -39,17 +39,24 @@ Loviz.Views.Pagina = Backbone.View.extend({
 	},
 	addbloque:function (bloque) {
 		var views_bloque = new Loviz.Views.Bloque({model:bloque});
-		debugger;
 	},
 	llenar_carruseles:function () {
 		var self = this;
 		var id_pagina = this.model.id;
 		var carruseles = window.collections.carruseles
+		if (carruseles.length === 0) {
+			carruseles = new Loviz.Collections.Carruseles();
+			carruseles.fetch({
+				data:$.param({pagina:id_pagina})
+			}).done(function () {
+				carruseles.forEach(self.addcarrusel,self);
+			})
+		}else{
+			carruseles.forEach(self.addcarrusel,self);
+		}
 	},
 	addcarrusel:function (carrusel) {
-		var modelo = new Loviz.Models.Carrusel();
-		modelo.set(carrusel)
-		var views_carrusel = new Loviz.Views.Carrusel({model:modelo})
+		var views_carrusel = new Loviz.Views.Carrusel({model:carrusel});
 		//this.lista_carrusel(views_carrusel);
 	},
 	lista_carrusel:function (view) {
