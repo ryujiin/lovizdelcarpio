@@ -75,7 +75,6 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 		this.$('.lista').owlCarousel({
 			items:num_items,
 		});
-		debugger;
 	},
 	addComentario:function (coment) {
 		if (this.num_carrusel<4) {

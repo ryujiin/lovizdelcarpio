@@ -10,13 +10,16 @@ $(document).ready(function(){
     window.models.carro = new Loviz.Models.Carro();
     window.models.producto_single = new Loviz.Models.Producto_single();
     window.models.pagina = new Loviz.Models.Pagina();
+    window.models.header_banner = new Loviz.Models.Header_banner();
 
     //Collecciones
     window.collections.paginas = new Loviz.Collections.Paginas();
+    window.collections.generos = new Loviz.Collections.Generos();
     window.collections.bloques = new Loviz.Collections.Bloques();
     window.collections.carruseles = new Loviz.Collections.Carruseles();
     window.collections.menus = new Loviz.Collections.Menus();
     window.collections.catalogo = new Loviz.Collections.Productos();
+    window.collections.categorias = new Loviz.Collections.Categorias();
     window.collections.producto_single = new Loviz.Collections.Productos_Single();
 
     //Vista Tienda

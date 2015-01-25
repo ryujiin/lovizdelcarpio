@@ -16,6 +16,21 @@
         {{cuerpo}}
     </script>
 
+    <script id="bloque_header_template" type="text/template">
+      <div class="imagen_banner">
+        <img src="{{foto}}" alt="{{descripcion}}">        
+        <div class="text-center titulo_banner_header">
+          {%if genero%}
+          <div class="genero">
+            {{genero}}            
+          </div>
+          {%endif%}
+          {{titulo|capitalize}}
+        </div>                
+      </div>
+
+    </script>
+
     <script id="bloque_imagen_template" type="text/template">
       <figure>
         <a href="{{link}}" class="link">

@@ -16,7 +16,8 @@ Loviz.Routers.Base = Backbone.Router.extend({
   	},
 	root : function () {
 		var self = this;
-		this.pagina('home')
+		this.pagina('home');
+		window.views.body.view_banner_header.$el.empty();
 		window.views.head.todoDefault();
 	},
 	carro : function () {
@@ -24,9 +25,19 @@ Loviz.Routers.Base = Backbone.Router.extend({
 		window.views.carro.render();
 	},
 	catalogo:function (genero) {
+		var self = this;
 		window.app.page = 'catalogo'
 		window.app.catalogo.genero = genero;
 
+		//Cambiar Imagen y cabezera de la pagina Genero
+		if (window.collections.generos.length===0) {
+			window.collections.generos.fetch().done(function () {
+				window.views.body.view_banner_header.cambiar_genero(genero)
+			})
+		}else{
+			window.views.body.view_banner_header.cambiar_genero(genero)
+		}
+		//Borrar productos
 		window.collections.catalogo.reset();
 		
 		if (window.views.catalogo === undefined) {
@@ -35,11 +46,39 @@ Loviz.Routers.Base = Backbone.Router.extend({
 			});
 		};
 		window.views.catalogo.render();
-		window.collections.catalogo.buscar_productos()
-	},
-	catalogo_categoria:function () {
-		window.app.page = 'catalogo'
+		window.collections.catalogo.buscar_productos();
 
+		//Agregar Categorias al Catalogo
+		if (this.views_categorias===undefined) {
+			this.views_categorias = new Loviz.Views.Categorias();
+		}else{
+			this.views_categorias.render();
+		}
+		window.views.catalogo.$('.lateral').append(this.views_categorias.$el)
+	},
+	catalogo_categoria:function (genero,categoria) {
+		window.app.page = 'catalogo_categoria'
+		window.app.catalogo.genero = genero;
+		window.app.catalogo.categoria = categoria;
+
+		if (window.collections.categorias.length===0) {
+			window.collections.categorias.fetch().done(function () {
+				window.views.body.view_banner_header.cambiar_categoria();
+			})
+		}else{
+			window.views.body.view_banner_header.cambiar_categoria();
+		}
+
+		
+		window.collections.catalogo.reset();
+		
+		if (window.views.catalogo === undefined) {
+			window.views.catalogo = new Loviz.Views.Catalogo({
+				collection:window.collections.catalogo
+			});
+		};
+		window.views.catalogo.render();
+		window.collections.catalogo.buscar_productos();
 	},
 	producto_single:function (slug) {
 		window.app.page = 'producto_single'
@@ -63,7 +102,11 @@ Loviz.Routers.Base = Backbone.Router.extend({
 			modelo = new Loviz.Models.Pagina();
 			modelo.buscar(slug);
 		}else{
-			window.models.pagina.set(modelo.toJSON());
+			if (modelo.id===window.models.pagina.id) {
+				window.views.pagina.render();
+			}else{
+				window.models.pagina.set(modelo.toJSON());
+			}
 		}
 	},
 	carro:function () {

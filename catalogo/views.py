@@ -52,7 +52,18 @@ class CatalogoViewsets(viewsets.ReadOnlyModelViewSet):
 
 ##Catalogo##
 
-from serializers import ColoresSerializers,EstilosSerializers,TallaSerializers
+from serializers import ColoresSerializers,EstilosSerializers,TallaSerializers,GeneroSerializers
+
+class GeneroViewsets(viewsets.ReadOnlyModelViewSet):
+	serializer_class = GeneroSerializers
+
+	def get_queryset(self):
+		genero = self.request.QUERY_PARAMS.get('genero', None)
+		if genero != None:
+			queryset = Genero.objects.filter(slug=genero)
+		else:
+			queryset = Genero.objects.all()
+		return queryset
 
 class ColorViewsets(viewsets.ReadOnlyModelViewSet):
 	queryset = Color

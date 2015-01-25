@@ -66,10 +66,13 @@
 	<script src="{% static "js/backbone/models/tienda/menu.js/" %}"></script>
 	<script src="{% static "js/backbone/models/tienda/comentario.js/" %}"></script>
 	<script src="{% static "js/backbone/models/tienda/carrusel.js/" %}"></script>
+	<script src="{% static "js/backbone/models/tienda/banner_header.js/" %}"></script>
 	<script src="{% static "js/backbone/models/tienda/newsletter.js/" %}"></script>
 	<script src="{% static "js/backbone/models/catalogo/producto.js/" %}"></script>	
 	<script src="{% static "js/backbone/models/catalogo/producto_single.js/" %}"></script>
+	<script src="{% static "js/backbone/models/catalogo/genero.js/" %}"></script>
 	<script src="{% static "js/backbone/models/catalogo/estrellas.js/" %}"></script>
+	<script src="{% static "js/backbone/models/catalogo/categoria.js/" %}"></script>
 	
 	<!--
 	<script src="{% static "js/backbone/models/usuario/direcciones.js/" %}"></script>
@@ -84,11 +87,13 @@
 	<script src="{% static "js/backbone/collections/pagina/paginas.js/" %}"></script>
 	<script src="{% static "js/backbone/collections/catalogo/productos.js/" %}"></script>
 	<script src="{% static "js/backbone/collections/catalogo/productos_sinlge.js/" %}"></script>
+	<script src="{% static "js/backbone/collections/catalogo/generos.js/" %}"></script>
 	<script src="{% static "js/backbone/collections/carro/lineas.js/" %}"></script>
+	<script src="{% static "js/backbone/collections/catalogo/categorias.js/" %}"></script>
+	
 	<!--
 	<script src="{% static "js/backbone/collections/usuario/direcciones.js/" %}"></script>
 	<script src="{% static "js/backbone/collections/catalogo/productos.js/" %}"></script>
-	<script src="{% static "js/backbone/collections/catalogo/categorias.js/" %}"></script>
 	<script src="{% static "js/backbone/collections/catalogo/filtros.js/" %}"></script>
 	-->
 	<!--Views-->
@@ -109,6 +114,8 @@
 		<script src="{% static "js/backbone/views/tienda/header.js/" %}"></script>
 	<script src="{% static "js/backbone/views/catalogo/catalogo.js/" %}"></script>	
 		<script src="{% static "js/backbone/views/catalogo/producto.js/" %}"></script>	
+		<script src="{% static "js/backbone/views/catalogo/categorias.js/" %}"></script>	
+		<script src="{% static "js/backbone/views/catalogo/categoria_link.js/" %}"></script>	
 	<script src="{% static "js/backbone/views/producto_single/producto_single.js/" %}"></script>
 		<script src="{% static "js/backbone/views/producto_single/galeria.js/" %}"></script>
 		<script src="{% static "js/backbone/views/producto_single/estrellas.js/" %}"></script>

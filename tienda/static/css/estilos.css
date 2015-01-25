@@ -1,5 +1,4 @@
 .contenedor{max-width:1200px;margin:0 auto}
-#banner_header{height:400px;background-color:#f9f9f9}
 form .form-group{position:relative}
 form .texto_ayuda{border:1px solid #ccc;border-radius:10px;position:absolute;font-size:.8em;width:100px;display:none;}
 form .texto_ayuda.left{left:-20px}
@@ -10,7 +9,8 @@ form .texto_ayuda.left{left:-20px}
 #newsletter .newsletter .envoltura .glyphicon{margin:0 6px;cursor:pointer}
 #newsletter .newsletter .gracias{font-size:.6em}
 #newsletter .newsletter .error_sombra{box-shadow:inset 0 0 9px 1px rgba(240,0,0,0.7)}
-body a{color:#111}
+body a{color:#111;}
+body a:hover{color:#111}
 body .bloque{padding:2px}
 body .bg-plomo{background:#f4f4f4}
 body img{width:100%}
@@ -22,7 +22,10 @@ body .invisible{display:none}
 body .contraste1{background:#111;color:#fff}
 body .clickeable{cursor:pointer}
 body .subtitulo{font:italic 21px Georgia,"Times New Roman",serif}
-#banner_header.banner{height:100px !important}
+#banner_header{height:400px;background-color:#f9f9f9;overflow:hidden;}
+#banner_header.banner{position:relative;height:200px !important}
+#banner_header .titulo_banner_header{position:absolute;top:80px;left:46%;color:#fff;font-size:35px;text-shadow:2px 2px 2px rgba(0,0,0,0.5);text-transform:uppercase;font-family:serif;}
+#banner_header .titulo_banner_header .genero{font-size:12px}
 .btn-default.contraste1{color:#fff;background:#111;font-family:'Pathway Gothic One',sans-serif;text-transform:uppercase;font-size:1.2em;}
 .btn-default.contraste1:hover{background:#2dbab2;color:#111}
 #contenido{padding:10px 0;min-height:400px}
@@ -42,6 +45,7 @@ body .subtitulo{font:italic 21px Georgia,"Times New Roman",serif}
 .carro .panel-body #lineas_carro .img{width:110px}
 .carro .panel-body #lineas_carro .nombre{font-size:1.2em}
 .carro .panel-body #tabla_carro .table{border-bottom:none}
+.categorias .categoria_link{list-style:none;text-transform:uppercase}
 .comentarios{position:relative;}
 .comentarios .boton-comentario{position:absolute;top:0;right:0}
 .comentarios .comentario{margin-top:15px;}
@@ -124,4 +128,5 @@ nav.menu.principal li{font-family:'Pathway Gothic One',sans-serif;text-transform
 nav.menu.menu_normal ul{margin:0 0 20px 0}
 nav.menu.menu_normal li{padding:2px 0;font-size:12px}
 .reviews .estrellas .promedio{margin:0 5px;font-weight:bold;text-decoration:underline}
-.sin-titulo .titulo{display:none}
+.sin-titulo >.titulo{display:none}
+#contenido.sin-titulo h1.titulo{display:none}

@@ -116,6 +116,8 @@ class Talla(models.Model):
 class Genero(models.Model):
 	nombre = models.CharField(max_length=100)
 	slug = models.CharField(max_length=120,unique=True,editable=True,blank=True,null=True)
+	descripcion = models.TextField(blank=True,null=True)
+	foto = models.ImageField(upload_to='genero/fotos/',blank=True,null=True)
 
 	def __unicode__(self):
 		return self.nombre

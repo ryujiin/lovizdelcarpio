@@ -181,3 +181,7 @@ class TallaSerializers(serializers.ModelSerializer):
 
 	def get_filtro(self,obj):
 		return 'talla'
+
+class GeneroSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = Genero
