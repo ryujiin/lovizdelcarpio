@@ -25,6 +25,7 @@ $(document).ready(function(){
     //Vista Tienda
     window.views.body = new Loviz.Views.Body( $('body') );
     window.views.head = new Loviz.Views.Header();
+    window.views.bread = new Loviz.Views.Bread();
     window.views.pagina = new Loviz.Views.Pagina({
         model:window.models.pagina
     });

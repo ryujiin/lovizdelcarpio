@@ -31,7 +31,7 @@ class Producto(models.Model):
 		return self.full_name
 
 	def save(self, *args, **kwargs):
-		self.full_name = ("%s %s (%s)") %(self.categoria,self.nombre,self.color)
+		self.full_name = ("%s (%s)") %(self.nombre,self.color)
 		if not self.slug:
 			self.slug = slugify(self.full_name)
 		super(Producto, self).save(*args, **kwargs)
