@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalogo', '0017_auto_20150113_1619'),
+        ('catalogo', '0001_initial'),
     ]
 
     operations = [
@@ -48,6 +48,7 @@ class Migration(migrations.Migration):
                 ('nombre', models.CharField(max_length=100, null=True, blank=True)),
                 ('precio', models.DecimalField(null=True, max_digits=10, decimal_places=2, blank=True)),
                 ('stock', models.PositiveIntegerField(default=0)),
+                ('total', models.DecimalField(null=True, max_digits=10, decimal_places=2, blank=True)),
                 ('color', models.ForeignKey(blank=True, to='catalogo.Color', null=True)),
                 ('talla', models.ForeignKey(blank=True, to='catalogo.Talla', null=True)),
             ],

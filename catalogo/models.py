@@ -7,31 +7,23 @@ from sorl.thumbnail import get_thumbnail
 
 # Create your models here.
 class Producto(models.Model):
-	MARCAS = (
-    	('Loviz DelCarpio', 'Loviz DelCarpio'),
-    	('Doomckan DC', 'Doomckan DC'),
-	)
 	nombre = models.CharField(max_length=120,blank=True,null=True)
 	full_name = models.CharField(max_length=120, unique=True,blank=True,null=True,editable=False)
-	marca = models.CharField(max_length=120, choices=MARCAS)
-	categoria = models.ForeignKey('Categoria',blank=True,null=True,related_name='cate')
-	estilo = models.ForeignKey('Estilo',blank=True,null=True)
-	color = models.ForeignKey('Color',blank=True,null=True,)
+	marca = models.ForeignKey('Marca',blank=True,null=True)
 	slug = models.CharField(max_length=120,editable=False,unique=True)
 	parientes = models.ManyToManyField('self',blank=True,null=True, related_name='colores')
+	categorias = models.ManyToManyField('Categoria',blank=True,null=True,related_name='categorias_producto')
 	activo = models.BooleanField(default=True)
 	descripcion = models.TextField(blank=True,null=True)
 	detalles = models.TextField(blank=True,null=True)
 	creado = models.DateTimeField(auto_now_add=True)
-	imagen = models.ImageField(upload_to="uploads/catalogo/producto/imagen/")
 	video = models.CharField(max_length=120, blank=True,null=True)
-	relacionados = models.ManyToManyField('self',blank=True,null=True,related_name='relacionados')
 
 	def __unicode__(self):
 		return self.full_name
 
 	def save(self, *args, **kwargs):
-		self.full_name = ("%s (%s)") %(self.nombre,self.color)
+		self.full_name = ("%s (%s) - %s") %(self.nombre,self.color,self.marca)
 		if not self.slug:
 			self.slug = slugify(self.full_name)
 		super(Producto, self).save(*args, **kwargs)
@@ -113,63 +105,27 @@ class Talla(models.Model):
 			self.slug = slugify(self.nombre)
 		super(Talla, self).save(*args, **kwargs)
 
-class Genero(models.Model):
-	nombre = models.CharField(max_length=100)
-	slug = models.CharField(max_length=120,unique=True,editable=True,blank=True,null=True)
-	descripcion = models.TextField(blank=True,null=True)
-	foto = models.ImageField(upload_to='genero/fotos/',blank=True,null=True)
-
-	def __unicode__(self):
-		return self.nombre
-
-	def save(self, *args, **kwargs):
-		if not self.slug:
-			self.slug = slugify(self.nombre)
-		super(Genero, self).save(*args, **kwargs)
-
 class Categoria(models.Model):
 	nombre = models.CharField(max_length=120)
-	seccion = models.ForeignKey('Seccion')
 	full_name = models.CharField(max_length=255,db_index=True, editable=False)
-	genero = models.ForeignKey('Genero',blank=True,null=True,)
+	padre = models.ForeignKey('self',blank=True,null=True)	
 	slug = models.SlugField(max_length=120,unique=True,editable=False)
 	descripcion = models.TextField(blank=True,null=True)
 	activo = models.BooleanField(default=True)
-	imagen = models.ImageField(upload_to='categories',blank=True,null=True,max_length=250)
-	banner = models.ImageField(upload_to='categories/banner/',blank=True,null=True,max_length=250)
+	imagen = models.ImageField(upload_to='categorias',blank=True,null=True,max_length=250)
 	
 	def __unicode__(self):
-		return ('%s de %s') %(self.nombre,self.genero)
+		return self.full_name
 
 	def save(self, *args, **kwargs):
-		self.full_name = ('%s de %s - %s') %(self.seccion,self.genero,self.nombre)
+		if self.padre:
+			self.full_name = "%s - %s" %(self.padre,self.nombre)
+		else:
+			self.full_name = self.nombre
 		if not self.slug:
-			self.slug = slugify(self.full_name)
+			self.slug = slugify(self.nombre)
 		super(Categoria, self).save(*args, **kwargs)
 
-class Seccion(models.Model):
-	nombre = models.CharField(max_length=120)
-	slug = models.SlugField(max_length=120,unique=True,editable=False,blank=True,null=True)
-
-	def __unicode__(self):
-		return self.nombre
-
-	def save(self, *args, **kwargs):
-		if not self.slug:
-			self.slug = slugify(self.nombre)
-		super(Seccion, self).save(*args, **kwargs)
-
-class Estilo(models.Model):
-	nombre = models.CharField(max_length=120)
-	slug = models.SlugField(max_length=120,unique=True,editable=False,blank=True,null=True)
-
-	def __unicode__(self):
-		return self.nombre
-
-	def save(self, *args, **kwargs):
-		if not self.slug:
-			self.slug = slugify(self.nombre)
-		super(Estilo, self).save(*args, **kwargs)
 
 class ProductoVariacion(models.Model):
 	producto = models.ForeignKey(Producto,related_name='variaciones')
@@ -205,3 +161,9 @@ class ProductoImagen(models.Model):
 	def get_thum(self):
 		img = get_thumbnail(self.foto, '150x100', quality=80)
 		return img
+
+class Marca(models.Model):
+	nombre = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.nombre

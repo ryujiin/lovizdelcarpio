@@ -162,16 +162,6 @@ class ColoresSerializers(serializers.ModelSerializer):
 	def get_filtro(self,obj):
 		return 'color'
 
-class EstilosSerializers(serializers.ModelSerializer):
-	filtro = serializers.SerializerMethodField()
-
-	class Meta:
-		model = Estilo
-		fields=('nombre','slug','filtro')
-
-	def get_filtro(self,obj):
-		return 'estilo'
-
 class TallaSerializers(serializers.ModelSerializer):
 	filtro = serializers.SerializerMethodField()
 
@@ -181,7 +171,3 @@ class TallaSerializers(serializers.ModelSerializer):
 
 	def get_filtro(self,obj):
 		return 'talla'
-
-class GeneroSerializers(serializers.ModelSerializer):
-	class Meta:
-		model = Genero

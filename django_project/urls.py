@@ -27,11 +27,9 @@ router.register(r'ubigeo',RegionViewset,'ubigeo')
 router.register(r'categorias', CategoriaViewsets,'categorias')
 
 #router.register(r'colores', ColorViewsets,'colores')
-router.register(r'genero', GeneroViewsets,'genero')
+
 router.register(r'filtro/colores', ColorViewsets,'colores')
 router.register(r'filtro/tallas', TallaViewsets,'tallas')
-#router.register(r'secciones', SeccionViewsets,'secciones')
-router.register(r'filtro/estilos', EstiloViewsets,'estilos')
 
 ##Tienda##
 router.register(r'tienda/pagina',PaginaViewsets,'paginas');

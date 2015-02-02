@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from models import *
-from serializers import ProductoListaSerializer,ProductoSingleSereializer,CategoriaSerializer
+from serializers import *
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 
 from django.http import HttpResponse, Http404
@@ -52,22 +52,6 @@ class CatalogoViewsets(viewsets.ReadOnlyModelViewSet):
 
 ##Catalogo##
 
-from serializers import ColoresSerializers,EstilosSerializers,TallaSerializers,GeneroSerializers
-
-class GeneroViewsets(viewsets.ReadOnlyModelViewSet):
-	serializer_class = GeneroSerializers
-
-	def get_queryset(self):
-		genero = self.request.QUERY_PARAMS.get('genero', None)
-		if genero != None:
-			queryset = Genero.objects.filter(slug=genero)
-		else:
-			queryset = Genero.objects.all()
-		return queryset
-
-class ColorViewsets(viewsets.ReadOnlyModelViewSet):
-	queryset = Color
-
 class ColorViewsets(viewsets.ReadOnlyModelViewSet):
 	queryset = Color.objects.all()
 	serializer_class = ColoresSerializers
@@ -75,10 +59,3 @@ class ColorViewsets(viewsets.ReadOnlyModelViewSet):
 class TallaViewsets(viewsets.ReadOnlyModelViewSet):
 	queryset = Talla.objects.all()
 	serializer_class = TallaSerializers
-
-class SeccionViewsets(viewsets.ReadOnlyModelViewSet):
-	model = Seccion
-
-class EstiloViewsets(viewsets.ReadOnlyModelViewSet):
-	queryset = Estilo.objects.all();
-	serializer_class = EstilosSerializers

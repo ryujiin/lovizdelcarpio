@@ -8,9 +8,9 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalogo', '0016_auto_20141229_1412'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('ubigeo', '__first__'),
+        ('catalogo', '0001_initial'),
     ]
 
     operations = [
@@ -58,6 +58,20 @@ class Migration(migrations.Migration):
                 ('codigo_postal', models.CharField(max_length=20, null=True, blank=True)),
                 ('ubigeo', models.ForeignKey(related_name='direccion', blank=True, to='ubigeo.Ubigeo', max_length=100, null=True)),
                 ('usuario', models.ForeignKey(related_name='direcciones', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Suscrito',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('email', models.CharField(max_length=100, null=True, blank=True)),
+                ('suscrito', models.BooleanField(default=True)),
+                ('usuario', models.BooleanField(default=True)),
+                ('cliente', models.ForeignKey(blank=True, to='cliente.Cliente', null=True)),
+                ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
             },
