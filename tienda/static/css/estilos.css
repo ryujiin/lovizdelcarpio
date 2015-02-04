@@ -22,8 +22,8 @@ body .invisible{display:none}
 body .contraste1{background:#111;color:#fff}
 body .clickeable{cursor:pointer}
 body .subtitulo{font:italic 21px Georgia,"Times New Roman",serif}
-#banner_header{height:400px;background-color:#f9f9f9;overflow:hidden;}
-#banner_header.banner{position:relative;height:200px !important}
+#banner_header{background-color:#f9f9f9;}
+#banner_header.banner{position:relative}
 #banner_header .titulo_banner_header{position:absolute;top:80px;left:46%;color:#fff;font-size:35px;text-shadow:2px 2px 2px rgba(0,0,0,0.5);text-transform:uppercase;font-family:serif;}
 #banner_header .titulo_banner_header .genero{font-size:12px}
 .btn-default.contraste1{color:#fff;background:#111;font-family:'Pathway Gothic One',sans-serif;text-transform:uppercase;font-size:1.2em;}

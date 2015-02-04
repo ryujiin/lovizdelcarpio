@@ -3,16 +3,13 @@ Loviz.Routers.Base = Backbone.Router.extend({
 		"" : "root",
 		'carro/':'carro',
 		'comprar/':'comprar',
-		'catalogo/':'catalogo',		
-		'catalogo/:genero/':'catalogo',
-		'catalogo/:genero/:categoria/':'catalogo_categoria',
+		'catalogo/:categoria/':'catalogo',
 		'producto/:slug/':'producto_single',
 		'pagina/:slug/':'pagina',
 		'carro':'carro',
 		'*notFound': 'notFound',
 	},
 	initialize : function () {
-		window.app.catalogo = {};		
   	},
 	root : function () {
 		var self = this;
@@ -24,7 +21,11 @@ Loviz.Routers.Base = Backbone.Router.extend({
 		window.app.page = 'carro';
 		window.views.carro.render();
 	},
-	catalogo:function (genero) {
+	catalogo:function (categoria) {
+		var self = this;
+		window.app.page = 'catalogo'
+		debugger;
+		/*
 		var self = this;
 		window.app.page = 'catalogo'
 		window.app.catalogo.genero = genero;
@@ -55,6 +56,7 @@ Loviz.Routers.Base = Backbone.Router.extend({
 			this.views_categorias.render();
 		}
 		window.views.catalogo.$('.lateral').append(this.views_categorias.$el)
+		*/
 	},
 	catalogo_categoria:function (genero,categoria) {
 		window.app.page = 'catalogo_categoria'
@@ -116,4 +118,5 @@ Loviz.Routers.Base = Backbone.Router.extend({
 	notFound:function () {
 		this.error_404 = new Loviz.Views.Pagina_404();
 	},
+
 });

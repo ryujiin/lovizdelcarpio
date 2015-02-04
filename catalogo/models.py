@@ -11,6 +11,7 @@ class Producto(models.Model):
 	full_name = models.CharField(max_length=120, unique=True,blank=True,null=True,editable=False)
 	marca = models.ForeignKey('Marca',blank=True,null=True)
 	slug = models.CharField(max_length=120,editable=False,unique=True)
+	color = models.ForeignKey('Color',blank=True,null=True)
 	parientes = models.ManyToManyField('self',blank=True,null=True, related_name='colores')
 	categorias = models.ManyToManyField('Categoria',blank=True,null=True,related_name='categorias_producto')
 	activo = models.BooleanField(default=True)
@@ -29,7 +30,8 @@ class Producto(models.Model):
 		super(Producto, self).save(*args, **kwargs)
 
 	def get_thum(self):
-		img = get_thumbnail(self.imagen, '450x350', quality=80)
+		img = ProductoImagen.objects.get(producto=self,orden=0)
+		img = get_thumbnail(img.foto, '450x350', quality=80)
 		return img
 
 	def get_en_oferta(self):
@@ -119,11 +121,11 @@ class Categoria(models.Model):
 
 	def save(self, *args, **kwargs):
 		if self.padre:
-			self.full_name = "%s - %s" %(self.padre,self.nombre)
+			self.full_name = "%s - %s" %(self.padre.full_name,self.nombre)
 		else:
 			self.full_name = self.nombre
 		if not self.slug:
-			self.slug = slugify(self.nombre)
+			self.slug = slugify(self.full_name)
 		super(Categoria, self).save(*args, **kwargs)
 
 

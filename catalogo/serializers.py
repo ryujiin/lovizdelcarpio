@@ -3,42 +3,17 @@ from models import *
 from django.conf import settings
 
 class ProductoListaSerializer(serializers.ModelSerializer):
-	thum = serializers.SerializerMethodField('get_img_thum')
-	categoria= serializers.CharField(read_only=True)
-	estilo= serializers.CharField(read_only=True)
-	color= serializers.CharField(read_only=True)
-	en_oferta = serializers.SerializerMethodField('get_oferta')
-	precio = serializers.SerializerMethodField('get_elprecio')
-	precio_mostrar = serializers.SerializerMethodField('get_precio_descuento')
-	genero = serializers.SerializerMethodField('get_el_genero')
-	categoria_slug = serializers.SerializerMethodField()
-	es_nuevo = serializers.SerializerMethodField()
+	marca = serializers.CharField(read_only=True)
+	color = serializers.CharField(read_only=True)
+	thum = serializers.SerializerMethodField()
 	class Meta:
 		model=Producto
-		fields =('id','nombre','full_name','marca','categoria','estilo','genero','color','slug','activo','thum','en_oferta','precio','precio_mostrar','categoria_slug','es_nuevo')
+		fields=('id','nombre','full_name','slug','marca','color','categorias','thum')
 
-	def get_img_thum(self,obj):
-		img = obj.get_thum().url
-		return img
-
-	def get_oferta(self,obj):
-		return obj.get_en_oferta()
-
-	def get_elprecio(self,obj):
-		return obj.get_precio_lista()
-
-	def get_precio_descuento(self,obj):
-		return obj.get_precio_oferta_lista()
-
-	def get_el_genero(self,obj):
-		return obj.categoria.genero.slug
-
-	def get_categoria_slug(self,obj):
-		return obj.categoria.slug
-
-	def get_es_nuevo(self,obj):
-		return True
-
+	def get_thum(self,obj):
+		imagen = obj.get_thum()
+		return imagen.url
+		
 class ProductoVariacionSerializer(serializers.ModelSerializer):
 	talla = serializers.CharField(read_only=True)
 	precio_venta = serializers.SerializerMethodField('get_precio')
@@ -128,30 +103,8 @@ class ProductoSingleSereializer(serializers.ModelSerializer):
 		return genero
 
 class CategoriaSerializer(serializers.ModelSerializer):
-	genero = serializers.CharField(read_only=True)
-	seccion = serializers.CharField(read_only=True)
-	imagen = serializers.SerializerMethodField()
-	banner = serializers.SerializerMethodField()
-	genero_slug = serializers.SerializerMethodField()
-	filtro = serializers.SerializerMethodField()
-
 	class Meta:
 		model = Categoria
-		fields = ('id','nombre','slug','genero','genero_slug','activo','imagen','descripcion','full_name','seccion','banner','filtro')
-
-	def get_banner(self,obj):
-		if obj.banner:
-			return obj.banner.url
-
-	def get_imagen(self,obj):
-		if obj.imagen:
-			return obj.imagen.url
-
-	def get_genero_slug(self,obj):
-		return obj.genero.slug
-
-	def get_filtro(self,obj):
-		return 'categoria_slug'
 
 class ColoresSerializers(serializers.ModelSerializer):
 	filtro = serializers.SerializerMethodField()	
