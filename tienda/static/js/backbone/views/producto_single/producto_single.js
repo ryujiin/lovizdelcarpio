@@ -16,6 +16,15 @@ Loviz.Views.Producto_single = Backbone.View.extend({
 	render: function () {
 		this.num_relacionado = 0;
 	    var producto = this.model.toJSON();
+	    producto.categorias.forEach(function(categoria){
+	    	if (categoria.seccion ==='genero') {
+	    		producto.genero = categoria.nombre
+	    	}else if(categoria.seccion ==='categoria'){
+	    		producto.cate = categoria.nombre
+	    	}else if (categoria.seccion==='estilo') {
+	    		producto.estilo = categoria.nombre
+	    	};
+	    })
 	    var html = this.template(producto);
 	    this.$el.html(html);
 	    this.generar_galeria();

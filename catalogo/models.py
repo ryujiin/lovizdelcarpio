@@ -66,10 +66,11 @@ class Producto(models.Model):
 			oferta = variaciones[0].oferta
 			descuento= precio*oferta/100
 			precio = precio - descuento
+			precio = "%0.2f" %(precio)
+			return precio
 		else:
 			precio = self.get_precio_lista()
-		precio = "%0.2f" %(precio)
-		return precio
+			return precio
 
 	def get_parientes(self):
 		parientes = self.parientes.all()
@@ -108,16 +109,22 @@ class Talla(models.Model):
 		super(Talla, self).save(*args, **kwargs)
 
 class Categoria(models.Model):
+	SECCIONES = (
+		('genero','Genero'),
+		('categoria','Categoria'),
+		('estilo','Estilo'),
+	)
 	nombre = models.CharField(max_length=120)
 	full_name = models.CharField(max_length=255,db_index=True, editable=False)
-	padre = models.ForeignKey('self',blank=True,null=True)	
+	padre = models.ForeignKey('self',blank=True,null=True)
+	seccion = models.CharField(max_length=100,choices=SECCIONES,blank=True,null=True)
 	slug = models.SlugField(max_length=120,unique=True,editable=False)
 	descripcion = models.TextField(blank=True,null=True)
 	activo = models.BooleanField(default=True)
 	imagen = models.ImageField(upload_to='categorias',blank=True,null=True,max_length=250)
 	
 	def __unicode__(self):
-		return self.full_name
+		return self.slug
 
 	def save(self, *args, **kwargs):
 		if self.padre:

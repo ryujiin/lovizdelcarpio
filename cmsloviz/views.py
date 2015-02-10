@@ -28,13 +28,7 @@ class BloqueViewsets(viewsets.ReadOnlyModelViewSet):
 	serializer_class = BloqueSerializer
 
 	def get_queryset(self):
-		queryset = Bloque.objects.all()
-		pagina = self.request.QUERY_PARAMS.get('pagina', None)
-		cms = self.request.QUERY_PARAMS.get('cms', None)
-		if pagina is not None:
-			queryset = Bloque.objects.filter(paginas_mostrar=pagina)
-		if cms is not None:
-			queryset = Bloque.objects.filter(paginas_mostrar__isnull=True)
+		queryset = Bloque.objects.filter(activo=True)
 		return queryset
 
 class MenuViewsets(viewsets.ReadOnlyModelViewSet):
@@ -42,22 +36,13 @@ class MenuViewsets(viewsets.ReadOnlyModelViewSet):
 
 	def get_queryset(self):
 		queryset = Menu.objects.all()
-		pagina = self.request.QUERY_PARAMS.get('pagina', None)
-		cms = self.request.QUERY_PARAMS.get('cms', None)
-		if pagina is not None:
-			queryset = Menu.objects.filter(pagina=pagina)
-		if cms is not None:
-			queryset = Menu.objects.filter(pagina__isnull=True)
 		return queryset
 		
 class CarruselViewset(viewsets.ReadOnlyModelViewSet):
 	serializer_class = CarruselSerializer
 
 	def get_queryset(self):
-		queryset = Carrusel.objects.filter(titulo='enrique')
-		pagina = self.request.QUERY_PARAMS.get('pagina', None)
-		if pagina is not None:
-			queryset = Carrusel.objects.filter(paginas_mostrar=pagina)
+		queryset = Carrusel.objects.filter(activo=True)
 		return queryset
 
 class PaginaViewsApi(APIView):

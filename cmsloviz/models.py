@@ -78,6 +78,7 @@ class Carrusel(models.Model):
 
 	def __unicode__(self):
 		return self.nombre_interno
+
 def url_imagen_carrusel(self,filename):
 	url = "carrusel/imagen/%s" % (filename)
 	return url
@@ -109,7 +110,7 @@ class Pagina(models.Model):
 		return num
 
 	def __unicode__(self):
-		return "%s - %s" %(self.titulo,self.slug)
+		return self.slug
 
 class SeccionesPagina(models.Model):
 	nombre = models.CharField(max_length=120)

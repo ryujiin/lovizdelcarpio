@@ -12,9 +12,10 @@ Loviz.Routers.Base = Backbone.Router.extend({
 	initialize : function () {
   	},
 	root : function () {
+		window.app.page = 'home'
 		var self = this;
 		this.pagina('home');
-		window.views.body.view_banner_header.$el.empty();
+		window.app.slug='home';
 		window.views.head.todoDefault();
 	},
 	carro : function () {
@@ -23,64 +24,20 @@ Loviz.Routers.Base = Backbone.Router.extend({
 	},
 	catalogo:function (categoria) {
 		var self = this;
-		window.app.page = 'catalogo'
-		debugger;
-		/*
-		var self = this;
-		window.app.page = 'catalogo'
-		window.app.catalogo.genero = genero;
+		window.app.page = 'catalogo';
+		window.app.slug = categoria;
 
-		//Cambiar Imagen y cabezera de la pagina Genero
-		if (window.collections.generos.length===0) {
-			window.collections.generos.fetch().done(function () {
-				window.views.body.view_banner_header.cambiar_genero(genero)
-			})
-		}else{
-			window.views.body.view_banner_header.cambiar_genero(genero)
-		}
-		//Borrar productos
 		window.collections.catalogo.reset();
-		
+		var modelo = window.collections.categorias.findWhere({slug:window.app.slug});
+
 		if (window.views.catalogo === undefined) {
 			window.views.catalogo = new Loviz.Views.Catalogo({
-				collection:window.collections.catalogo
+				collection:window.collections.catalogo,
 			});
 		};
 		window.views.catalogo.render();
 		window.collections.catalogo.buscar_productos();
-
-		//Agregar Categorias al Catalogo
-		if (this.views_categorias===undefined) {
-			this.views_categorias = new Loviz.Views.Categorias();
-		}else{
-			this.views_categorias.render();
-		}
-		window.views.catalogo.$('.lateral').append(this.views_categorias.$el)
-		*/
-	},
-	catalogo_categoria:function (genero,categoria) {
-		window.app.page = 'catalogo_categoria'
-		window.app.catalogo.genero = genero;
-		window.app.catalogo.categoria = categoria;
-
-		if (window.collections.categorias.length===0) {
-			window.collections.categorias.fetch().done(function () {
-				window.views.body.view_banner_header.cambiar_categoria();
-			})
-		}else{
-			window.views.body.view_banner_header.cambiar_categoria();
-		}
-
-		
-		window.collections.catalogo.reset();
-		
-		if (window.views.catalogo === undefined) {
-			window.views.catalogo = new Loviz.Views.Catalogo({
-				collection:window.collections.catalogo
-			});
-		};
-		window.views.catalogo.render();
-		window.collections.catalogo.buscar_productos();
+		window.views.catalogo.banner_top.modificar_modelo(modelo);
 	},
 	producto_single:function (slug) {
 		window.app.page = 'producto_single'
@@ -113,6 +70,7 @@ Loviz.Routers.Base = Backbone.Router.extend({
 	},
 	carro:function () {
 		window.app.page = 'carro';
+		window.app.slug='carro';
 		window.views.carro.render();
 	},
 	notFound:function () {

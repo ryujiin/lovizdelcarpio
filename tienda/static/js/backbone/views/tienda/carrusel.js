@@ -4,6 +4,9 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 	initialize: function () {
 		var self = this;
 		this.sacar_datos();
+		window.routers.base.on('route',function(e){
+            self.aparecer(e);
+        });
 	},
 	render:function () {
 		var css = this.model.toJSON().css;
@@ -18,7 +21,21 @@ Loviz.Views.Carrusel = Backbone.View.extend({
 	sacar_datos:function () {
 		var teme = this.model.toJSON().template;
 		this.template = swig.compile($(teme).html());
-		this.render();
+		
+	},
+	aparecer:function (e) {
+		var mostrar = false;
+		var paginas = this.model.toJSON().paginas_mostrar;
+		paginas.forEach(function(pag){
+			if (window.app.slug===pag) {
+				mostrar = true;
+			}
+		});
+		if (mostrar===false) {
+			this.$el.empty();
+		}else{
+			this.render();
+		}
 	},
 	llenar_carrusel:function () {
 		if (this.model.toJSON().modelo==='') {

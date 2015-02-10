@@ -5,12 +5,15 @@ Loviz.Collections.Productos = Backbone.Collection.extend({
 	initialize:function () {
 	},
 	buscar_productos:function () {
-		if (window.app.catalogo.genero===undefined) {
-			this.fetch();
-		}else{
+		var self = this;
+		if (window.app.slug) {
 			this.fetch({
-				data:$.param({genero:window.app.catalogo.genero,enrique:'enn'})
-			});
-		}
+				data:$.param({categoria:window.app.slug})
+			}).done(function () {
+				if (self.length===0) {
+					window.views.catalogo.no_productos();
+				};
+			})
+		};
 	}
 });

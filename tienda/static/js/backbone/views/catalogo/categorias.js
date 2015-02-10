@@ -6,37 +6,24 @@ Loviz.Views.Categorias = Backbone.View.extend({
     
     initialize: function () {
         var self = this;
-        this.render();
-        window.routers.base.on('route',function(e){
-            if (e==='catalogo_categoria') {
-                self.$el.hide();
-            }else{
-                self.$el.show();
-            }
-        });
     },
     render: function () {
-        var json_filtro = {'titulo': 'Categorias'}
+        var json_filtro = this.crear_json();
         var html = this.template(json_filtro);
         this.$el.html(html);
-        this.buscar_categorias();
+        $('#categoria_producto').append(this.$el);
+        this.addCategorias();
     },
     addCategoria:function (cate) {   
         var link = new Loviz.Views.Categoria_link({ model: cate });
         this.$('.filtros').append(link.render().el);
     },
-    buscar_categorias:function () {
-        var self = this;
-        if (window.collections.categorias.length===0) {
-            window.collections.categorias.fetch().done(function () {
-                self.addCategorias();
-            })
-        }else{
-            this.addCategorias();
-        }
-    },
     addCategorias:function () {
-        var coleccion = window.collections.categorias.where({genero_slug:window.app.catalogo.genero});
+        var coleccion = this.collection.where({padre:window.app.slug});
         coleccion.forEach(this.addCategoria,this);
     },
+    crear_json:function () {
+        var json = {'titulo': 'Categorias'}
+        return json
+    }
 });

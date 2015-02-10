@@ -14,40 +14,51 @@ $(document).ready(function(){
 
     //Collecciones
     window.collections.paginas = new Loviz.Collections.Paginas();
-    window.collections.generos = new Loviz.Collections.Generos();
     window.collections.bloques = new Loviz.Collections.Bloques();
     window.collections.carruseles = new Loviz.Collections.Carruseles();
     window.collections.menus = new Loviz.Collections.Menus();
-    window.collections.catalogo = new Loviz.Collections.Productos();
     window.collections.categorias = new Loviz.Collections.Categorias();
     window.collections.producto_single = new Loviz.Collections.Productos_Single();
+    window.collections.catalogo = new Loviz.Collections.Productos();
 
     //Vista Tienda
-    window.views.body = new Loviz.Views.Body( $('body') );
-    window.views.head = new Loviz.Views.Header();
-    window.views.bread = new Loviz.Views.Bread();
-    window.views.pagina = new Loviz.Views.Pagina({
-        model:window.models.pagina
-    });
-    window.views.carro = new Loviz.Views.Carro({
-        model:window.models.carro
-    });
-    window.views.producto_single = new Loviz.Views.Producto_single({
-        model: window.models.producto_single
-    });
-    window.views.mini_carro = new Loviz.Views.Mini_carro({
-        model:window.models.carro
-    });
-    window.views.mini_usuario = new Loviz.Views.Mini_usuario({
-        model:window.models.usuario
-    });
     
-    galleta = window.views.body.obt_galleta();
 
     //buscar
-    Backbone.history.start({
-        pushState:true,
-    });    
+    window.collections.bloques.fetch().done(function () {
+        window.collections.carruseles.fetch().done(function () {
+            window.collections.menus.fetch().done(function () {                
+                window.collections.categorias.fetch().done(function () {
+                    iniciar_vistas();
+                    Backbone.history.start({
+                        pushState:true,
+                    });
+                })                
+            })
+        })
+    });
+
+    function iniciar_vistas () {
+        window.views.body = new Loviz.Views.Body( $('body') );
+        window.views.head = new Loviz.Views.Header();
+        window.views.bread = new Loviz.Views.Bread();
+        window.views.pagina = new Loviz.Views.Pagina({
+            model:window.models.pagina
+        });
+        window.views.carro = new Loviz.Views.Carro({
+            model:window.models.carro
+        });
+        window.views.producto_single = new Loviz.Views.Producto_single({
+            model: window.models.producto_single
+        });
+        window.views.mini_carro = new Loviz.Views.Mini_carro({
+            model:window.models.carro
+        });
+        window.views.mini_usuario = new Loviz.Views.Mini_usuario({
+            model:window.models.usuario
+        });
+        galleta = window.views.body.obt_galleta();
+    }
 
     //Funcion para el CRF
     function getCookie(name){

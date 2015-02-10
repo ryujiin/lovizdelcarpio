@@ -9,7 +9,7 @@ Loviz.Views.Bread = Backbone.View.extend({
         });
     },
     aparecer:function (e) {
-        if (e==='root') {
+        if (e==='root' || e === 'carro') {
             this.$el.hide();
         }else{
             this.$el.show();
