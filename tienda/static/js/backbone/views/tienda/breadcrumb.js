@@ -9,17 +9,37 @@ Loviz.Views.Bread = Backbone.View.extend({
         });
     },
     aparecer:function (e) {
-        if (e==='root' || e === 'carro') {
-            this.$el.hide();
-        }else{
+        if (e==='catalogo' || e === 'producto_single') {
             this.$el.show();
-            this.ver_links();
+            this.generar_links();
+        }else{
+            this.$el.hide();
         }
     },
+    generar_links:function () {
+        this.$('.breadcrumb').empty();
+        this.ver_links();
+        this.linkhome();
+    },
     ver_links:function () {
-        if (window.app.page==='catalogo') {
-            json = {link:'/',nombre:'Home'};
-            
+        var cate = window.collections.categorias.findWhere({slug:window.app.slug});
+        this.nuevolink(cate);
+        this.verificar_padre(cate);
+    },
+    nuevolink:function (cate) {
+        var link = new Loviz.Views.Bread_link({model:cate});
+        this.$('.breadcrumb').prepend(link.render().el);
+    },
+    linkhome:function () {
+        var modelo_home = new Loviz.Models.Categoria();
+        modelo_home.set({slug:'/',nombre:'Home',home:true});
+        var link_home = new Loviz.Views.Bread_link({model:modelo_home});
+        this.$('.breadcrumb').prepend(link_home.render().el);
+    },
+    verificar_padre:function (cate) {
+        if (cate.toJSON().padre!==null) {
+            cate = window.collections.categorias.findWhere({slug:cate.toJSON().padre});
+            this.nuevolink(cate);
         };
-    }
+    },
 });

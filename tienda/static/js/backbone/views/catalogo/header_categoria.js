@@ -18,7 +18,6 @@ Loviz.Views.Header_categoria = Backbone.View.extend({
 	},
 	aparecer:function (e) {
 		if (window.app.page!=='catalogo') {
-			console.log
 			this.$el.hide();
 		}else{
 			this.$el.show();

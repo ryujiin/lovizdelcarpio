@@ -20,10 +20,19 @@ Loviz.Views.Categorias = Backbone.View.extend({
     },
     addCategorias:function () {
         var coleccion = this.collection.where({padre:window.app.slug});
-        coleccion.forEach(this.addCategoria,this);
+        if (coleccion.length===0) {
+            this.$el.hide();
+        }else{
+            this.$el.show();
+            coleccion.forEach(this.addCategoria,this);
+        }
     },
     crear_json:function () {
         var json = {'titulo': 'Categorias'}
+        var cate = this.collection.findWhere({slug:window.app.slug})
+        if (cate.toJSON().padre!==null) {
+            json = {'titulo':cate.toJSON().nombre}
+        };
         return json
     }
 });
